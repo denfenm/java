@@ -1,0 +1,33 @@
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+//FILEINPUTSTREAM
+public class FileCopier2 {
+public static void main(String[] args) throws FileNotFoundException {
+	try {
+		File file = new File("groceries2.txt");
+		FileInputStream fis = new FileInputStream(file); //fis boleh read object. serializable interface makes sure that i can write the class into file
+			//class implements Serializable
+			//pack the variable as an obj and move them to the file
+			//reading it back can use byte stream
+			//reading image and mov clips boleh guna fileinputstream
+		int content;
+		while((content = fis.read()) != -1) {
+			System.out.print((char) content);
+		}
+		fis.close();
+	} catch (IOException e) {
+		e.printStackTrace();
+	}
+}}
+
+/*class student implements serializable
+ * {
+ * int a;
+ * int b;
+ * }
+ * 
+ * kalau nak read class kena guna bytestream
+ * 
+ * arraylist is a seriazable object. try out put arraylist in file*/
