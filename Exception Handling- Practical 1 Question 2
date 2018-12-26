@@ -1,0 +1,101 @@
+/*
+Write a testing class TestTrace that contains the static main() method, and another class 
+CallEg that contains three methods. The main() method will create a CallEg object and call
+its methodA().  
+class CallEg 
+{ 
+public void methodA() throws ArithmeticException 
+{ 
+} 
+public void methodB() throws ArithmeticException 
+{ 
+} 
+public void methodC() throws ArithmeticException 
+{ 
+} 
+} 
+public class TestTrace 
+public static void main ( String[] args ) 
+{ 
+CallEg eg = new CallEg(); // use default constructor 
+try 
+{ 
+eg.methodA(); 
+} 
+catch ( ArithmeticException oops ) 
+{ 
+oops.printStackTrace(); 
+} 
+} 
+}  
+The catch{} block in main() prints a stack trace. 
+1. Put a statement in methodA() that divides by zero to create an ArithmeticException..
+Observe the output.  
+2. Remove the division statement from methodA(). Change the code so that methodA() calls 
+methodB() which calls methodC(). Put a statement in methodC() that divides by zero to
+create an ArithmeticException.. Observe the output.  
+3. Add to the code so that methodA() calls methodB() inside a try{} block, and methodB() 
+calls methodC() inside a try{} block. In methodC() put the divide by zero statement inside a 
+try{} block. After each try{} block put a catch{} block which catches the exception, prints
+a stack trace, and throws the exception object to its caller. Observe the output.  
+
+Notice that the stack trace contains information about which class and which method was active
+at the time of the exception
+*/
+//calleg class
+
+import java.*;
+public class CallEg {
+	public void methodC() throws ArithmeticException 
+	{
+		try {
+			int a = 20/0;
+		} catch (ArithmeticException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void methodB() throws ArithmeticException 
+	{
+		try {
+		methodC();
+	} catch (ArithmeticException e) {
+		e.printStackTrace();
+	}
+	}
+
+public void methodA() throws ArithmeticException 
+{
+	//int a = 20/0;
+	try {
+		methodB();
+	} catch (ArithmeticException e) {
+		e.printStackTrace();
+	}
+	
+}
+
+
+
+}
+
+//testtrace
+
+public class TestTrace {
+public static void main (String args[]) {
+	
+	CallEg eg = new CallEg(); 
+	try
+	{
+		eg.methodA();
+	}
+	catch (ArithmeticException oops)
+	{
+		oops.printStackTrace();
+	}
+}
+}
+
+
+
+
