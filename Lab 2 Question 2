@@ -1,0 +1,65 @@
+/*
+2.	Write a program to create a file named Exercise3.txt if it does not exist. 
+Write 100 integers created randomly into the file using text I/O. Integers are separated by spaces 
+in the file. Read the data back from the file and display the data in 
+increasing order. 
+*/
+
+
+import java.util.*;
+import java.io.*;
+
+
+public class Lab2Q2 extends Random{
+
+		public static void main(String[] args) {
+			//write to file
+			Random r = new Random();
+			int i;
+			int arr[] = new int[4];
+			File file = new File("LAB2Q2.txt");
+			
+			/*if(file.exists())
+			 * {
+			 * sytm out (file alr exist)
+			 * system.exit(-1); it stops the program
+			 */
+				try {
+				PrintWriter o = new PrintWriter (file);
+				
+				for (i = 0; i < arr.length; i++) { //for(int i=0; i<10; i++)
+					arr[i] = 1 + r.nextInt(20);
+					o.printf("%d ", arr[i]);
+				}
+				
+				o.close(); //closing stream i have opened
+				
+				Scanner input = new Scanner(file);
+				 for ( i = 0; i < arr.length; i++) 
+			        {
+			            for (int j = i + 1; j < arr.length; j++) 
+			            {
+			                if (arr[i] > arr[j]) 
+			                {
+			                    int temp = arr[i];
+			                    arr[i] = arr[j];
+			                    arr[j] = temp;
+			                }
+			            }
+			        }
+				
+			        for (i = 0; i < arr.length; i++) 
+			        {
+			            System.out.printf("%d ",arr[i]);
+			        }
+			        
+				} catch (IOException ex) {
+					System.out.println(ex);
+				}
+				}
+				//read
+			
+			
+}
+
+
