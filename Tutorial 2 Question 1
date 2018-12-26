@@ -1,0 +1,136 @@
+//1.	Write a program that read from Exercise1.txt
+//and count the number of characters, words, and lines in a file. 
+//Words are separated by whitespace characters. 
+//zara shah
+
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Scanner;
+import java.io.*;
+
+public class Tut2Q1 {
+	static Scanner in;
+
+public static void main(String[] args) {
+	
+
+	in = new Scanner(System.in);
+	
+	String name = "";
+	
+	System.out.print("Enter name of file\n>");
+	
+	name = in.next();
+	File file = new File(name);
+	
+	functions h = new functions(); 
+		
+			 if(!file.exists()) {
+					
+					try {
+					System.out.print("DOES NOT EXIST. Create a new one.\n>\n");
+					file.createNewFile();
+								
+					PrintWriter output = new PrintWriter(file);
+					
+					
+					output.close(); 
+					h.inputStr(output);
+					
+					} catch (IOException e) {
+						
+					System.out.printf("ERROR: %s\n", e);
+		
+		} catch (Exception e) {
+			
+		System.out.printf("ERROR: %s\n", e);
+	
+	}
+			 }
+					String temp ="";
+					int lines = 0, words = 0, chr = 0;
+					int[] countAlp = new int[25];
+					try (Scanner in = new Scanner(file)) 
+				    {
+
+				        while (in.hasNext()) //while(s.hasNext()) { string w = s.next(); , wcount++; //next means word
+				        {
+				        	
+				                String s = in.nextLine();
+				                lines++;
+				                chr += s.length();
+				                String[] split = s.split(" ");
+				                for (String word : split) //while(s.hasNextLine()); string l = s.nextLine(); line++;
+				                    words++;
+				                }
+				                
+				                temp = in.nextLine();
+				                for (char ch : temp.toCharArray()) //tochararray convert string to character array. the array size is same as the lnegth of the string
+				                { //for (int i =0; i < temp.toCharArray(); i++)
+				                    ch = Character.toUpperCase(ch);
+				                    if (alphabet(ch)) 
+				                    {
+				                        countAlp[ch - 'A']++;
+				                    }
+				                }
+
+				        		        
+				    } catch(FileNotFoundException e) {
+				    	System.out.printf("ERROR: %s\n", e);
+				    } 
+					
+					 for (int i = 0; i < countAlp.length; i++) 
+					    {
+					        
+							System.out.println((char)(i + 'A') + " occurrence = " + countAlp[i]);
+					    }
+
+					 System.out.println("Characters: " + chr);
+				        System.out.println("Words: " + words);
+				        System.out.println("Lines: " + lines); 
+					 
+
+}
+						
+
+
+
+
+	
+static boolean alphabet(char chr) 
+{
+
+   return (chr >= 'A' && chr <= 'Z');
+}
+
+
+
+}
+
+//functions class
+import java.io.*;
+import java.util.*;
+
+
+public class functions {
+
+	Scanner in = new Scanner(System.in);
+
+	 
+		void inputStr(PrintWriter output) {
+				
+				
+				System.out.println("Enter a string. Enter 0 to terminate ");
+				String str = "";
+				
+				while (str != "0") {
+				str = in.nextLine();
+				output.println(str);
+
+			}
+				
+}
+}
+
+//zara shah
