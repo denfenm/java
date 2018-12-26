@@ -1,0 +1,244 @@
+/*
+You have been give a project that implements the logic for a human resource application. The 
+application allows for creating, retrieving, deleting and listing of Employee objects. 
+ 
+Tasks 
+1.  Open the Catch Exceptions Project 
+2.  Right click on the source folder 
+3.  Create new package  
+4.  Name the package as exceptionsActivity2 
+5.  Import  the  java files  in  to  the  package  (You  need  to  download  the  related  java files 
+from Times) 
+6.  Create a InvalidOperationsException class in the exceptionsActivity2 package 
+7.  Complete  the  InvalidOperationException  class.  The  InvalidOperationException  class 
+should  
+a.  Extend the Exception class 
+b.  Contain four public constructors with parameters matching those of the four 
+public constructors present in the Exception class. For each constructor , use 
+super() to invoke the parent class constructor matching parameters. 
+8.  Modify the add method within the EmployeeImpl class to 
+a.  Declare  that  a  InvalidOperationException  may  be  produced  during  the 
+execution of this method 
+b.  Use  an  if  statement  to  validate  that  an  existing  employee  will  not  be 
+overwritten by the add.If one would , generate InvalidOperationException and 
+deliver  it  to  the  caller  of  the  method.  The  InvalidOperationException  should 
+contain a message String indicating what went wrong and why. 
+c.  Use  a  try  –  catch  block  to  catch  the  ArrayIndexOutofBoundsException 
+unchecked exception that could possibility be generated 
+d.  Within  the  catch  block  that  you  just  created,  generate  a 
+InvalidOperationException  and  deliver  it  to  the  caller  of  the  method.  The 
+InvalidOperationException  should  contain  a  message  String  indicating  what 
+went wrong and why. 
+9.  Modify the delete method within the EmployeeImpl class to 
+a.  Declare  that  a  InvalidOperationException  may  be  produced  during  the 
+execution of this method 
+b.  Use an if statement to validate that an existing employee is being deleted. If 
+one  would  not  be  ,  generate  InvalidOperationException  and  deliver  it  to  the 
+caller of the method. The InvalidOperationException should contain a message 
+String indicating what went wrong and why. 
+c.  Use  a  try  –  catch  block  to  catch  the  ArrayIndexOutofBoundsException 
+unchecked exception that could possibility be generated 
+d.  Within  the  catch  block  that  you  just  created  ,  generate  a 
+InvalidOperationException  and  deliver  it  to  the  caller  of  the  method.  The 
+InvalidOperationException  should  contain  a  message  String  indicating  what 
+went wrong and why. 
+10. Modify the findById method within the EmployeeImpl class to 
+a.  Declare  that  a  InvalidOperationException  may  be  produced  during  the 
+execution of this method 
+b.  Use  a  try  –  catch  block  to  catch  the  ArrayIndexOutofBoundsException 
+unchecked exception that could possibility be generated 
+c.  Within  the  catch  block  that  you  just  created  ,  generate  a 
+InvalidOperationException  and  deliver  it  to  the  caller  of  the  method.  The 
+InvalidOperationException  should  contain  a  message  String  indicating  what 
+went wrong and why. 
+ 
+11. Modify  the  EmployeeTest  class  to  handle  the  InvalidOperationExeption  objects  that 
+are thrown by EmployeeImpl. 
+a.  Modify the main Method: 
+Add the throws statement from the main method 
+public static void main(String[] args) throws InvalidOperationException 
+12. Run  the  project  .  Test  all  the  operations  by  invoking  the  methods  :  add,  delete  and 
+findById.  
+For  example  .  Attempt to  delete  an  employee  that does  not exist.  You  should  see  a 
+message similar to :  
+ 
+ 
+Exception in thread “main” 
+.exceptionsExample2:Error deleting employee, no such employee 7 
+
+*/
+
+//employee class
+package exceptionsActivity2;
+
+import java.text.NumberFormat;
+
+
+
+public class Employee {
+
+    private int id;
+    private String firstName;
+    private String lastName;
+    private float salary;
+
+    public Employee() { }
+    
+    public Employee(int id, String firstName, String lastName, float salary) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+       
+        this.salary = salary;
+    }
+
+public int getId() {
+    return id;
+}
+
+public String getFirstName() {
+    return firstName;
+}
+
+public String getLastName() {
+    return lastName;
+}
+
+
+public float getSalary() {
+    return salary;
+}
+
+@Override
+public String toString() {
+    return "Employee ID:   " + getId() + "\n" +
+            "Employee Name: " + getFirstName() + " " + getLastName() + "\n" +
+            
+            "Salary:        " + NumberFormat.getCurrencyInstance().format((double)getSalary());
+}
+
+
+
+
+    
+}
+
+//employee impl class
+package exceptionsActivity2;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class EmployeeImpl {
+    private int i =0;
+    // not thread-safe
+    private static Employee[] employeeArray = new Employee[10];
+
+    // package level access
+    EmployeeImpl() {
+    }
+
+    public void add(Employee emp) throws InvalidOperationsException 
+    {
+    	employeeArray[i]=emp;
+    	i++;
+    	throw new InvalidOperationsException("zara");
+    	
+    }
+
+    public void delete(int id) throws InvalidOperationsException{
+    	
+    	if(employeeArray[id] == null) {
+    		
+    		throw new InvalidOperationsException();
+    }
+    }
+    	
+
+    public Employee findById(int id) 
+    {
+        return employeeArray[id];
+    }
+    public Employee[] getAllEmployees() throws InvalidOperationsException {
+        List<Employee> emps = new ArrayList<>();
+      // Iterate through the memory array and find Employee objects
+        try {
+        for (Employee e : employeeArray) {
+            if (e != null) {
+            	
+                emps.add(e);
+            }
+            else
+            	throw new InvalidOperationsException();
+        }
+       
+    }
+        catch(ArrayIndexOutOfBoundsException e)
+        {
+        	e.printStackTrace();
+        }
+        return emps.toArray(new Employee[0]);
+    }
+
+}
+
+//employeetest class
+package exceptionsActivity2;
+
+public class EmployeeTest {
+    
+    public static void main(String[] args) {
+        System.out.println("hhh");
+        try {
+        	System.out.println("bb");
+        EmployeeImpl emp = new EmployeeImpl();
+        Employee e1 = new Employee(0, "bob", "builder", 1250.50f);
+        emp.add(e1);
+        Employee e2 = new Employee(1, "harry", "potter", 1250.50f);
+        emp.add(e2);
+        Employee e3 = new Employee(5, "harry", "potter", 1250.50f);
+        emp.add(e3);
+        Employee[] allEmps = emp.getAllEmployees();
+        if(allEmps!=null) {
+        	System.out.print(allEmps);
+        }
+        
+        for (Employee employee : allEmps) {
+            System.out.println(employee + "\n");
+            System.out.print("hooo");
+        }
+        emp.delete(7);
+        } catch (InvalidOperationsException e) {
+        	e.getLocalizedMessage();
+        }
+        
+                }          
+    
+    
+    
+    }
+//invalidoperationsexception class
+package exceptionsActivity2;
+
+public class InvalidOperationsException extends Exception{
+
+	 public InvalidOperationsException() {
+	        // TODO Auto-generated constructor stub
+	    }
+
+	    public InvalidOperationsException(String message) {
+	        super(message);
+	        // TODO Auto-generated constructor stub
+	    }
+
+	    public InvalidOperationsException(Throwable cause) {
+	        super(cause);
+	        // TODO Auto-generated constructor stub
+	    }
+
+	    public InvalidOperationsException(String message, Throwable cause) {
+	        super(message, cause);
+	        // TODO Auto-generated constructor stub
+	    }
+	
+}
