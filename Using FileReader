@@ -1,0 +1,21 @@
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+//FILEREADER
+public class FileCopier3 {
+public static void main(String[] args) throws FileNotFoundException {
+	try {
+		FileReader fr = new FileReader("groceries2.txt"); //converts decimal into characters
+		//FileInputStream fis = new FileInputStream(file);
+		int content;
+		while((content = fr.read()) != -1) {
+			System.out.print((char)content);
+		}
+		fr.close();
+	} catch (IOException e) {
+		
+		e.printStackTrace();
+	}
+}}
