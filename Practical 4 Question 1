@@ -1,0 +1,166 @@
+/*
+
+You are required to write an ordinary Java class (named Ishuffle) with a generic method
+that shuffles an ArrayList with the following signature. Add necessary constructor (s)
+and/or variable(s) if necessary. 
+
+public static <E> void shuffle (ArrayList<E> list){ 
+…
+} 
+Note: to shuffle a list, you could use a random generator to do so.
+ 
+After writing the Ishuffle class, write a test/driver class (contains main method and
+named IshuffleTest) to demonstrate the usage of the shuffle method with TWO different
+concrete data types (e.g. One list of integers and one list of strings). 
+*/
+
+import java.util.ArrayList;
+import java.util.Collections;
+
+
+/*public class Ishuffle {
+	
+	
+	
+	public static <E> void shuffle (ArrayList<E> list){
+		
+			Collections.shuffle(list);
+	
+			
+	
+		}
+
+
+}*/
+
+public class Ishuffle<E> {
+	
+	ArrayList<E> list ;
+	
+	public void shuffle (ArrayList<E> list){
+		
+			Collections.shuffle(list);
+		
+	
+		}
+	
+	/*public void sortList(ArrayList<E> list)
+	{
+		Collections.sort(list);
+	}*/
+	
+	public <E extends Comparable<? super E>>void sortList(ArrayList<E> list)
+	{
+		Collections.sort(list);
+		
+	}
+
+	public void print(ArrayList<E> list)
+	{
+		for (E value : list)
+			System.out.println(value);
+		
+	}
+	
+
+}
+
+//test class
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.Random;
+import java.util.Set;
+
+
+public class Test {
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public static void main(String[] args) {
+		
+		Ishuffle a = new Ishuffle();
+		ArrayList<String> stringlist = new ArrayList<String>();
+		stringlist.add("Apple");
+		stringlist.add("Orange");
+		stringlist.add("Pear");
+		
+
+		ArrayList<Integer> intlist = new ArrayList<Integer>();
+		intlist.add(1);
+		intlist.add(2);
+		intlist.add(3);
+		
+		ArrayList<Student> studentlist = new ArrayList<Student>();
+		studentlist.add(new Student("Faizal","S12343"));
+		studentlist.add(new Student("Hoesni","S22445"));
+		studentlist.add(new Student("Shi Jin","S11345"));
+		studentlist.add(new Student("Wai Loon","S23456"));
+		studentlist.add(new Student("Jane","S23456"));
+		studentlist.add(new Student("Jane","S23456"));
+		a.sortList(stringlist);
+		a.print(stringlist);
+		
+		//a.sortList(studentlist);
+		//a.print(studentlist);
+		
+		System.out.println("----------Sort by Student ID-------");
+		class StudentIDCompare implements Comparator<Student>
+		{
+			public int compare(Student one , Student two)
+			{
+				return one.getStudentID().compareTo(two.getStudentID());
+			}
+		}
+		
+		StudentIDCompare studentIDcompare = new StudentIDCompare();
+		
+		
+		Collections.sort(studentlist,studentIDcompare);
+		a.print(studentlist);
+		
+		
+		System.out.println("----------Sort by Student Name-------");
+		class StudentNameCompare implements Comparator<Student>
+		{
+			public int compare(Student one , Student two)
+			{
+				return one.getStudentName().compareTo(two.getStudentName());
+			}
+		}
+		
+		StudentNameCompare studentNamecompare = new StudentNameCompare();
+		
+		
+		Collections.sort(studentlist,studentNamecompare);
+		a.print(studentlist);
+		
+		
+		System.out.println("************HashSet******************");
+		
+		Set<Student> studentlistunique= new HashSet<Student>();
+		studentlistunique.addAll(studentlist);
+		System.out.println(studentlistunique);
+		for(Student x : studentlistunique)
+		{
+			System.out.println(x.hashCode());
+		}
+		
+		
+		
+		/*a.shuffle(stringlist);
+		a.shuffle(intlist);
+		a.shuffle(animallist);*/
+		
+		//Collections.sort(animallist);
+		//a.sort(animallist);
+		//a.print(animallist);
+		
+
+
+	}
+
+}
+
+
