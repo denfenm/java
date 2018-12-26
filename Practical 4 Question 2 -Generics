@@ -1,0 +1,71 @@
+/*
+Rewrite the question 1 with a generic class to shuffle an ArrayList of a generic type. This
+is to say that, your new class should not include a generic method.
+ 
+public class Ishuffle <E> {
+…
+} 
+
+As with the question 1, write a test/driver class to demonstrate the usage of the generic
+class with TWO different concrete data types.  
+*/
+
+import java.util.*;
+
+public class Ishuffle2 {
+
+	public  < E >  void shuffle (ArrayList<E> list) {
+		
+		//using random number generator
+		long seed = System.nanoTime();
+		//use collections framework
+		Collections.shuffle(list, new Random(seed));
+		
+	}
+	public static < E > void printList ( ArrayList<E> list) {
+		
+		for (E element : list) {
+			System.out.println(element);
+		}
+		
+	}
+}
+//test class
+import java.util.ArrayList;
+
+public class Ishuffle2Test {
+public static void main(String args[]) {
+	
+	Ishuffle2 is2 = new Ishuffle2();
+	
+	ArrayList <Integer> intArray = new ArrayList<Integer>();
+	intArray.add(1);
+	intArray.add(2);
+	intArray.add(3);
+	
+	ArrayList <String> stringArray = new ArrayList<String>();
+	stringArray.add("hoho");
+	stringArray.add("h");
+	
+	is2.shuffle(stringArray);
+	
+	is2.shuffle(intArray);
+	
+	//for loop way
+	for (Integer x : intArray) {
+		System.out.println(x);
+	
+	}
+	
+	for (String x : stringArray) {
+		System.out.println(x);
+		
+	}
+	//printList way
+	is2.printList(intArray);
+	
+	is2.printList(stringArray);
+
+}
+}
+
