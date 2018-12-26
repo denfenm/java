@@ -1,0 +1,49 @@
+/*1.	Create a FileCopier class to copy file with byte streams. Create a new file called groceries.txt. Enter a grocery list in TXT file and save it (one item per line). Copy the grocery list in TXT to a new TXT file named groceries (copy).txt.
+apples
+bananas
+water
+orange juice
+milk
+bread
+
+a)	Declare a String variable and initialize it to "today is a good day\n". Write it to groceries (copy).txt.
+b)	Modify the code to append output to file with FileOutputStream.
+*/
+
+import java.io.*;
+
+public class Lab10Q1 {
+public static void main(String[] args) throws IOException {
+	DataOutputStream out = 
+			new DataOutputStream(new FileOutputStream("groceris.txt"));
+			
+	
+		out.writeUTF("apples");
+		out.writeUTF("bananas");
+		out.writeUTF("water");
+		out.writeUTF("orane juice");
+		out.writeUTF("milk");
+		out.writeUTF("bread");
+	 
+	
+	try (
+			DataInputStream in =
+				new DataInputStream(new FileInputStream("groceries.txt"));
+			) {
+		String n;
+		while(in.available()!=0) {
+			
+			n = in.readUTF();
+			System.out.print(n + "\n");
+	}
+	} catch (IOException e) {
+		e.printStackTrace();
+	}
+		/*
+		while((in.read())!= -1)
+	{
+	System.out.println(in.read());
+	}*/
+	
+}
+}
