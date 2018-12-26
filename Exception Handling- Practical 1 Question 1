@@ -1,0 +1,29 @@
+/*
+Write a class named TestScores. The class constructor should accept any array of test scores as its
+argument. The class should have a method that returns the average of the test scores. If any test
+score in the array is negative or greater than 100 then the class should throw an
+IllegialArugumentException with the specified detail message to its caller. Demonstrate the usage
+of the class in a test program. 
+*/
+
+import java.*;
+import java.util.Scanner;
+public class Q1 {
+public static void main(String args[]) {
+	int arr[] = new int[10];
+	Scanner in = new Scanner(System.in);
+	int score, i=06;
+	System.out.println("This program will allow you to enter 10 test scores. The scores may not be more than 100");
+while(i<arr.length) {
+		System.out.println("Enter test score: ");
+	score = in.nextInt();
+	if (score > 100) {
+		throw new ArithmeticException("not valid");
+	}
+	
+	arr[i] = score;
+	i++;
+	}
+}
+}
+
