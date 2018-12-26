@@ -1,0 +1,58 @@
+/*
+Write a generic method (named Max) to compare and find the maximum of two generic
+elements of type T.
+ 
+For instance, the following class will do what you want, but it works only with numerical
+values as > is only meant for comparing two numerical values and not of reference types. 
+ 
+public class FindMax {
+    public static <T> T max(T x, T y) {
+        return x > y ? x : y;
+    }
+}
+ 
+Find a workaround to solve this issue. Perhaps, you might need to use “extends” keyword
+to place a proper bound on T (such as Comparable interface). Once you have created the
+class, write a test driver to demonstrate its usage through proper examples of your own
+choice. 
+
+(Note: In the above class, a conditional operator (?:) also known as the ternary operator is
+used to evaluate the Boolean expression “x>y”. As a result, if x>y then it returns x
+otherwise it returns y.)
+
+*/
+
+	
+
+public class FindMax {
+  
+	/*public static <T> T max(T x, T y) {
+        return x > y ? x : y;
+    }
+}*/
+
+	public <T extends Comparable<T>> T max(T x, T y) {
+        if(x.compareTo(y) > 0) {
+            return x;
+        }
+        return y;
+    }
+
+}
+
+
+//test class
+
+public class TestMax {
+
+	public static void main(String[] args) {
+		Integer firstValue = 10;
+        Integer secondValue = 20;
+
+        FindMax fm = new FindMax();
+        Integer result = fm.max(firstValue, secondValue);
+        System.out.println(result);
+	}
+
+}
+
