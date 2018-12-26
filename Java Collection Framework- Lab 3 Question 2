@@ -1,0 +1,167 @@
+/*
+2.	Write a program that reads an unspecified number of integers and finds the one that has the most occurrences. 
+The input ends when the input is 0. For example, if you entered 2 3 40 3 5 4 –3 3 3 2 0, the number 3 occurred most often. 
+If not one but several numbers have the most occurrences, all of them should be reported. For example, since 9 and 
+3 appear twice in the list 9 30 3 9 3 2 4, both occurrences should be reported.
+*/
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.Set;
+//tolong chegu!
+
+public class Q2 {
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		// Create a Scanner
+				Scanner input = new Scanner(System.in);
+
+				// Create a list and two sets
+				Map<Integer, Integer> map = new HashMap<>(); // Stores results
+
+				// Prompt the user to enter a number of integers
+				System.out.println("Enter a number of integers." 
+					+ "\nInput ends when the input is 0:");
+
+				int key;
+				while ((key = input.nextInt()) != 0) {
+					if (!map.containsKey(key)) {
+						map.put(key, 1);
+					}
+					else {
+						int frequency = map.get(key);
+						frequency++;
+						map.put(key, frequency);
+					}
+				}
+
+				// Find the maximum occurrence
+				int max = Collections.max(map.values());
+
+				// Display the integers that have the most occurences
+				System.out.print("The most occurrences integers are: ");
+				for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+					if (entry.getValue() == max) {
+						System.out.println(entry.getKey() + " count: " + max );
+						
+					}
+				}
+				System.out.println();
+			}
+/*Scanner input = new Scanner(System.in);
+ArrayList<Integer> arr1 = new ArrayList<Integer>();
+
+int no = 1;
+System.out.println("Type something");
+try {
+	while (no != 0) {
+no = input.nextInt();
+if(no!=0)
+arr1.add(no);
+else 
+	break;
+} 
+
+}catch (IllegalStateException e) {
+	System.out.println(e);
+}catch (Exception e ) {
+	System.out.println(e);
+}
+
+cf(arr1);
+	}*/
+/*
+TreeSet<Integer> count = new ArrayList<Integer>();
+int kira = 0;
+for(Integer x : count) {
+	Integer papa = arr1.get(x);
+	if(count.contains(papa))
+	{
+		kira++;
+		count.add(kira);
+	}
+	
+	
+}
+
+for(Integer max : count) {
+		
+	if(max < count.get()) {
+		max =count;	
+}
+System.out.println("The number "+ count );
+*/
+/*
+HashMap<Integer> tm = new HashMap<Integer>();
+
+System.out.println(arr1);
+
+for(Integer value: tm) {
+	if(map containsKey(no)) {
+		map.p
+	}
+	
+}
+tm.put(arr1, count);
+
+
+for(Integer temp : arr1) {
+	
+	count = Collections.frequency(arr1, temp);
+	
+	if(max < count) {
+		max =count;	
+		
+}
+ 
+	System.out.println("The number " + temp  + " occured " + count +" times.");
+}
+	
+*/
+//short answer for this
+	/*
+public static void countFrequencies(ArrayList<Integer> list) {
+
+	
+
+Set<Integer> st = new HashSet<Integer>(list);
+for(Integer s : st) {
+	System.out.println(s + ": " + Collections.frequency(list, s));
+
+}
+*/
+public static void cf(ArrayList<Integer> list) {
+	Integer max = 0;
+	Integer count = 0;
+	
+
+Set<Integer> st = new HashSet<Integer>(list);
+
+for(Integer s : st) {
+	
+	
+		max = Collections.frequency(list, s);
+		if(Collections.frequency(list, s) > max) {
+	System.out.println(s + ": " + Collections.frequency(list, s));
+
+} else if(Collections.frequency(list, s) == max) {
+	System.out.println(s + ": " + Collections.frequency(list, s));
+} else {
+	System.out.print("");
+}
+
+}
+}
+	
+	
+
+	
+	}
+
+
