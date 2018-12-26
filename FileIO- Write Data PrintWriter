@@ -3,6 +3,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
+//writing data using printwrite
+
 public class WriteDataQ2 {
 	public static void main(String [] args)throws IOException
 	{
@@ -32,6 +34,34 @@ public class WriteDataQ2 {
 		}
 		System.out.println("Total Score is"+ total);
 		input.close();
+		
+		
+	}
+
+}
+
+//writing to file text
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+
+public class WritetoFileText {
+
+	public static void main(String[] args) {
+		
+		try{
+			File file = new File("Demo2.txt");
+			PrintWriter printtofile= new PrintWriter(file);
+			
+			printtofile.print("I am here");
+			printtofile.println();
+			printtofile.close();
+			
+			
+		}catch (FileNotFoundException e)
+		{
+			
+		}
 		
 		
 	}
