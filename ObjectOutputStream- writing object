@@ -1,0 +1,17 @@
+
+import java.io.*;
+
+public class Q2Try {
+public static void main(String[] args) throws IOException, ClassNotFoundException {
+	ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream("invoice.dat"));
+	
+	Item item1 = new Item("SoCIT TShirt", 25.00, 10);
+	output.writeObject(item1);
+	
+	Item item2 = new Item("SoCIT Mug", 10.00, 15);
+	output.writeObject(item2);
+	
+	output.flush();
+	output.close();
+}
+}
