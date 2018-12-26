@@ -1,0 +1,44 @@
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.Scanner;
+
+public class ReadingfromURL {
+	
+	public static void main(String[] args) throws MalformedURLException,IOException 
+	{
+		URL url = new URL("https://en.wikipedia.org/wiki/Machine_learning");
+		//URL url2 = new URL("	http://www.coli.uni-saarland.de/~crocker/Teaching/Connectionist/fksummary.pdf");
+	
+		
+		try{
+		Scanner input = new Scanner(url.openStream());
+		int count=0;
+		int linecount=0;
+		while(input.hasNext())
+		{
+			String line = input.nextLine();
+			linecount++;
+			count+=line.length();
+	
+		
+		}
+	
+		
+		System.out.println("The file size is"+ count);
+		System.out.println("The file has "+ linecount+" lines");
+		
+	}
+		
+		finally
+		{
+			
+			System.out.println("Done");
+		}
+		
+		
+		
+	}
+	
+
+}
