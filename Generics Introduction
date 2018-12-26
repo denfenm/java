@@ -1,4 +1,42 @@
 
+
+
+
+public class Box<T> {
+//all datatype parameter i have in class
+	//denotes that class is generic 
+	//can i have generic non gerneric? yes
+private T t;
+
+public void(T t) {
+	this.t = t;
+}
+
+public T get() {
+	return t; //means it is returning a type parameter
+}
+
+
+
+public static void main(String[] args) {
+	Box<Integer> intBox = new Box<Integer>();//it means all T wil be integer
+	//erase T and replace it with intbox
+	Box<String> stringBox = new Box<String>(); //declare string box
+	
+	//once i declare an integer i can only add integer
+	
+	intBox.add(new Integer(10));
+	stringBox.add(new String("Hello Word")); 
+	//cannot process primitice data type, call them as reference type
+	
+	System.out.printf("%s", stringBox);
+	System.out.printf("%d", intBox);
+}
+}
+
+
+
+//creating a generic method to print the array
 public class GenericMethodTest {
 //collection framework at the back end it is generictype. because array has actually implemented generic
 	//generic method printArray
