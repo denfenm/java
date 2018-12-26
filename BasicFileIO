@@ -1,0 +1,30 @@
+
+import java.util.Scanner;
+import java.io.*;
+public class BasicFileIO {
+
+		public static void main(String[] args) {
+			//write to file
+			File file = new File("test.txt");
+			
+			try {
+				PrintWriter output = new PrintWriter (file);
+				output.println("Mike Fudge");
+				output.println(12);
+				output.close();
+			} catch (IOException ex) {
+				System.out.printf("ERROR: %s\n", ex);
+			}
+			//read the file
+			try {
+			
+			Scanner input = new Scanner(file);
+			String name = input.nextLine();
+			int age = input.nextInt();
+			
+			System.out.printf("Name: %s\n Age: %d\n", name,age);
+			} catch (FileNotFoundException ex) {
+				System.out.printf("ERROR: %s\n", ex);
+			} 
+ 		}
+}
